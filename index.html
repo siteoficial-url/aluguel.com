@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especial de Natal em Gramado | Última Kitnet Disponível</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1b3b2b; /* Verde elegante de Natal */
+            --secondary: #c5a059; /* Dourado sofisticado */
+            --accent: #9e2a2b; /* Vermelho natalino refinado */
+            --bg-light: #f9f8f6;
+            --text-dark: #222222;
+            --text-muted: #666666;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .brand-title {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Header & Hero */
+        header {
+            background: linear-gradient(rgba(27, 59, 43, 0.85), rgba(27, 59, 43, 0.9)), url('https://images.unsplash.com/photo-1543255006-d6395b6f147f?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px 80px;
+            position: relative;
+        }
+
+        .badge-natal {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(158, 42, 43, 0.4);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        header h1 span {
+            color: var(--secondary);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #e0e0e0;
+            font-weight: 300;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .hero-feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 8px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+
+        .hero-feature-item i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .urgency-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(158, 42, 43, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(158, 42, 43, 0.3);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Grid de Kitnets (2 colunas) */
+        .kitnets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .kitnet-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eae6df;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .kitnet-card.indisponivel {
+            opacity: 0.75;
+            filter: grayscale(20%);
+        }
+
+        .kitnet-card:hover:not(.indisponivel) {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(27, 59, 43, 0.1);
+        }
+
+        .tag-centro {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(27, 59, 43, 0.9);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            letter-spacing: 0.5px;
+        }
+
+        .tag-indisponivel {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(158, 42, 43, 0.9);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-ultima {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: var(--text-dark);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 10;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Carrossel / Galeria de 5 fotos por casa */
+        .gallery-container {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .gallery-track {
+            display: flex;
+            width: 500%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .gallery-slide {
+            width: 20%;
+            height: 100%;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 5;
+        }
+
+        .gallery-btn:hover {
+            background: var(--secondary);
+        }
+
+        .gallery-btn.prev { left: 10px; }
+        .gallery-btn.next { right: 10px; }
+
+        .gallery-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 5;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--secondary);
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* Conteúdo do Card */
+        .kitnet-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .kitnet-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .kitnet-subtitle {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .kitnet-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* Atributos / Ícones */
+        .features-list {
+            list-style: none;
+            margin-bottom: 25px;
+            border-top: 1px solid #f0ede6;
+            border-bottom: 1px solid #f0ede6;
+            padding: 15px 0;
+        }
+
+        .features-list li {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .features-list i {
+            color: var(--secondary);
+            width: 18px;
+            text-align: center;
+        }
+
+        /* Preço e Botão */
+        .card-footer-info {
+            margin-top: auto;
+        }
+
+        .price-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .price-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-reserve {
+            display: block;
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(27, 59, 43, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-reserve:hover {
+            background-color: var(--secondary);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(197, 160, 89, 0.4);
+        }
+
+        .btn-indisponivel {
+            display: block;
+            width: 100%;
+            background-color: #d1d5db;
+            color: #6b7280;
+            text-align: center;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: not-allowed;
+            border: none;
+        }
+
+        /* Rodapé do site */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 4px solid var(--secondary);
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            color: #d1d1d1;
+        }
+
+        /* Responsividade */
+        @media(max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            .kitnets-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header>
+        <div class="badge-natal"><i class="fa-solid fa-snowflake"></i> Promoção Especial de Natal</div>
+        <h1>Viva a Magia de <span>Gramado</span></h1>
+        <p>Hospede-se em kitnets de alto padrão, totalmente mobiliadas, climatizadas e localizadas a poucos passos do centro da cidade para curtir o Natal Luz com total conforto.</p>
+        
+        <div class="hero-features">
+            <div class="hero-feature-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Próximo ao Centro</span>
+            </div>
+            <div class="hero-feature-item">
+                <i class="fa-solid fa-snowflake"></i>
+                <span>Ar-Condicionado Quente/Frio</span>
+            </div>
+            <div class="hero-feature-item">
+                <i class="fa-solid fa-couch"></i>
+                <span>100% Mobiliado & Decorado</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- SEÇÃO PRINCIPAL -->
+    <main class="container">
+        <div class="section-header">
+            <div class="urgency-badge">
+                <i class="fa-solid fa-triangle-exclamation"></i> Atenção: Resta Apenas 1 Unidade Disponível!
+            </div>
+            <h2>Nossas Opções em Gramado</h2>
+            <p>Garanta sua estadia natalina na serra gaúcha antes que feche a agenda</p>
+        </div>
+
+        <div class="kitnets-grid">
+
+            <!-- KITNET 01 - ÚLTIMA UNIDADE DISPONÍVEL -->
+            <div class="kitnet-card">
+                <span class="tag-centro"><i class="fa-solid fa-map-pin"></i> 4 min do Centro</span>
+                <span class="tag-ultima"><i class="fa-solid fa-star"></i> ÚLTIMA VAGA</span>
+                
+                <!-- Galeria (5 fotos) -->
+                <div class="gallery-container" id="galeria-1">
+                    <div class="gallery-track">
+                        <div class="gallery-slide"><img src="watermarked_img_10234189023495489055.png" alt="Sala aconchegante Kitnet 1"></div>
+                        <div class="gallery-slide"><img src="watermarked_img_16756359586984224986.png" alt="Quarto confortável Kitnet 1"></div>
+                        <div class="gallery-slide"><img src="watermarked_img_6006165684917218272.png" alt="Cozinha compacta Kitnet 1"></div>
+                        <div class="gallery-slide"><img src="watermarked_img_10631376203382644411.png" alt="Banheiro moderno Kitnet 1"></div>
+                        <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80" alt="Detalhes de Natal Kitnet 1"></div>
+                    </div>
+                    <button class="gallery-btn prev" onclick="mudarSlide(1, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="gallery-btn next" onclick="mudarSlide(1, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="gallery-dots">
+                        <span class="dot active" onclick="irParaSlide(1, 0)"></span>
+                        <span class="dot" onclick="irParaSlide(1, 1)"></span>
+                        <span class="dot" onclick="irParaSlide(1, 2)"></span>
+                        <span class="dot" onclick="irParaSlide(1, 3)"></span>
+                        <span class="dot" onclick="irParaSlide(1, 4)"></span>
+                    </div>
+                </div>
+
+                <div class="kitnet-content">
+                    <h3 class="kitnet-title">Kitnet Noite Estrelada</h3>
+                    <div class="kitnet-subtitle">Conforto & Sofisticação</div>
+                    <p class="kitnet-desc">Ambiente integrado impecável com decoração natalina especial, excelente iluminação natural e aconchego ideal para casais.</p>
+                    
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-snowflake"></i> Ar-condicionado Split (Quente/Frio)</li>
+                        <li><i class="fa-solid fa-wifi"></i> Wi-Fi de alta velocidade (Fibra)</li>
+                        <li><i class="fa-solid fa-utensils"></i> Cozinha equipada (Cooktop, frigobar e micro-ondas)</li>
+                        <li><i class="fa-solid fa-tv"></i> Smart TV com Netflix e Canais a Cabo</li>
+                        <li><i class="fa-solid fa-bed"></i> Roupa de cama e banho de alta qualidade inclusas</li>
+                    </ul>
+
+                    <div class="card-footer-info">
+                        <div class="price-box">
+                            <span class="price-label">Diária Natal Luz</span>
+                            <span class="price-value">R$ 290,00</span>
+                        </div>
+                        <button class="btn-reserve" onclick="reservar('Kitnet Noite Estrelada')">
+                            <i class="fa-brands fa-whatsapp"></i> Deixar Reservado (Última Vaga)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KITNET 02 - ESGOTADA -->
+            <div class="kitnet-card indisponivel">
+                <span class="tag-centro"><i class="fa-solid fa-map-pin"></i> 3 min do Centro</span>
+                <span class="tag-indisponivel"><i class="fa-solid fa-lock"></i> ESGOTADO</span>
+                
+                <!-- Galeria (5 fotos) -->
+                <div class="gallery-container" id="galeria-2">
+                    <div class="gallery-track">
+                        <div class="gallery-slide"><img src="watermarked_img_16756359586984224986.png" alt="Quarto Kitnet 2"></div>
+                        <div class="gallery-slide"><img src="watermarked_img_10234189023495489055.png" alt="Sala Kitnet 2"></div>
+                        <div class="gallery-slide"><img src="watermarked_img_6006165684917218272.png" alt="Cozinha Kitnet 2"></div>
+                        <div class="gallery-slide"><img src="watermarked_img_10631376203382644411.png" alt="Banheiro Kitnet 2"></div>
+                        <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&w=800&q=80" alt="Decoração Natalina Kitnet 2"></div>
+                    </div>
+                    <button class="gallery-btn prev" onclick="mudarSlide(2, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="gallery-btn next" onclick="mudarSlide(2, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="gallery-dots">
+                        <span class="dot active" onclick="irParaSlide(2, 0)"></span>
+                        <span class="dot" onclick="irParaSlide(2, 1)"></span>
+                        <span class="dot" onclick="irParaSlide(2, 2)"></span>
+                        <span class="dot" onclick="irParaSlide(2, 3)"></span>
+                        <span class="dot" onclick="irParaSlide(2, 4)"></span>
+                    </div>
+                </div>
+
+                <div class="kitnet-content">
+                    <h3 class="kitnet-title">Kitnet Pinheiro Dourado</h3>
+                    <div class="kitnet-subtitle">Estilo & Praticidade</div>
+                    <p class="kitnet-desc">Móveis planejados de alto padrão, muito charme alpino e localização ultra central para você ir a pé aos principais desfiles.</p>
+                    
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-snowflake"></i> Ar-condicionado Inverter (Quente/Frio)</li>
+                        <li><i class="fa-solid fa-wifi"></i> Internet Wi-Fi dedicada</li>
+                        <li><i class="fa-solid fa-mug-hot"></i> Cafeteira elétrica e utensílios completos</li>
+                        <li><i class="fa-solid fa-water"></i> Aquecimento de água central a gás</li>
+                        <li><i class="fa-solid fa-shield-halved"></i> Prédio seguro com fechadura eletrônica</li>
+                    </ul>
+
+                    <div class="card-footer-inf
