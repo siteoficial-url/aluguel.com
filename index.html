@@ -196,6 +196,22 @@
             font-family: 'Playfair Display', serif;
         }
 
+        /* Resumo de Diárias Calculado */
+        .stay-summary {
+            background: #f4f6f4;
+            border: 1px solid #d8e2d8;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-top: -10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
         /* Botão de Envio */
         .btn-submit {
             display: block;
@@ -262,7 +278,7 @@
                     <h4>Kitnet Noite Estrelada</h4>
                     <p><i class="fa-solid fa-map-pin"></i> 4 min do Centro • Totalmente Mobiliada & Climatizada</p>
                 </div>
-                <div class="unit-price">R$ 290,00 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">/ diária</span></div>
+                <div class="unit-price">R$ 129,00 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">/ diária</span></div>
             </div>
 
             <form id="formReserva" onsubmit="enviarWhatsApp(event)">
@@ -293,45 +309,29 @@
                     <input type="text" id="endereco" required placeholder="Ex: Rua das Flores, 123 - Centro - Porto Alegre/RS">
                 </div>
 
-                <!-- SEÇÃO PERÍODO E DATA -->
+                <!-- SEÇÃO PERÍODO E DATA (CALENDÁRIO) -->
                 <div class="form-section-title" style="margin-top: 30px;">
-                    <i class="fa-solid fa-calendar-days"></i> Período da Locação
+                    <i class="fa-solid fa-calendar-days"></i> Período da Hospedagem
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="mes">Mês de Hospedagem *</label>
-                        <select id="mes" required>
-                            <option value="">Selecione o mês</option>
-                            <option value="Novembro/2026">Novembro / 2026</option>
-                            <option value="Dezembro/2026" selected>Dezembro / 2026 (Natal Luz)</option>
-                            <option value="Janeiro/2027">Janeiro / 2027</option>
-                        </select>
+                        <label for="checkin">Data de Check-in (Chegada) *</label>
+                        <input type="date" id="checkin" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="diaInicio">Dia de Chegada (Check-in) *</label>
-                        <select id="diaInicio" required>
-                            <option value="">Selecione o dia</option>
-                        </select>
+                        <label for="checkout">Data de Check-out (Saída) *</label>
+                        <input type="date" id="checkout" required>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="totalDias">Quantidade de Diárias *</label>
-                        <select id="totalDias" required>
-                            <option value="1">1 Diária</option>
-                            <option value="2">2 Diárias</option>
-                            <option value="3" selected>3 Diárias</option>
-                            <option value="4">4 Diárias</option>
-                            <option value="5">5 Diárias</option>
-					        <option value="6">6 Diárias</option>
-                            <option value="7">1 Semana (7 Diárias)</option>
-							<option value="+7">+7 Diárias</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
+                <div id="resumoDiarias" class="stay-summary" style="display: none;">
+                    <i class="fa-solid fa-circle-info"></i> <span id="textoResumo">Selecione as datas para calcular.</span>
+                </div>
+
+                <div class="form-row" style="margin-top: 15px;">
+                    <div class="form-group" style="grid-column: span 2;">
                         <label for="hospedes">Número de Hóspedes *</label>
                         <select id="hospedes" required>
                             <option value="1">1 Pessoa</option>
@@ -352,16 +352,54 @@
         <p>&copy; 2026 Locação Gramado Natal Luz. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- SCRIPT PARA DIAS E INTEGRAÇÃO WHATSAPP -->
+    <!-- SCRIPT PARA CALENDÁRIO E WHATSAPP -->
     <script>
-        // Popular dias de 1 a 31 automaticamente
-        const selectDia = document.getElementById('diaInicio');
-        for (let i = 1; i <= 31; i++) {
-            let option = document.createElement('option');
-            option.value = `Dia ${i}`;
-            option.textContent = `Dia ${i}`;
-            selectDia.appendChild(option);
+        // Configurar data mínima como hoje e preencher datas padrão para o Natal Luz
+        const hoje = new Date().toISOString().split('T')[0];
+        const inputCheckin = document.getElementById('checkin');
+        const inputCheckout = document.getElementById('checkout');
+        
+        inputCheckin.min = hoje;
+        
+        // Definir valores padrão atraentes para o Natal Luz (ex: 10/12 a 13/12 de 2026)
+        inputCheckin.value = "2026-12-10";
+        inputCheckout.value = "2026-12-13";
+        inputCheckout.min = inputCheckin.value;
+
+        // Atualizar data mínima de check-out ao mudar o check-in
+        inputCheckin.addEventListener('change', function() {
+            inputCheckout.min = inputCheckin.value;
+            if(inputCheckout.value < inputCheckin.value) {
+                inputCheckout.value = inputCheckin.value;
+            }
+            calcularDiarias();
+        });
+
+        inputCheckout.addEventListener('change', calcularDiarias);
+
+        function calcularDiarias() {
+            if(inputCheckin.value && inputCheckout.value) {
+                const data1 = new Date(inputCheckin.value);
+                const data2 = new Date(inputCheckout.value);
+                const diferencaTempo = data2 - data1;
+                const diferencaDias = Math.ceil(diferencaTempo / (1000 * 60 * 60 * 24));
+                
+                const boxResumo = document.getElementById('resumoDiarias');
+                const textoResumo = document.getElementById('textoResumo');
+
+                if(diferencaDias > 0) {
+                    const valorTotal = diferencaDias * 129;
+                    textoResumo.innerHTML = `Total de <strong>${diferencaDias} diária(s)</strong> selecionada(s) (Estimativa: R$ ${valorTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})})`;
+                    boxResumo.style.display = 'flex';
+                } else {
+                    textoResumo.innerHTML = `A data de saída deve ser posterior à data de entrada.`;
+                    boxResumo.style.display = 'flex';
+                }
+            }
         }
+
+        // Executar no carregamento para exibir o cálculo inicial padrão
+        calcularDiarias();
 
         function enviarWhatsApp(event) {
             event.preventDefault();
@@ -370,10 +408,15 @@
             const email = document.getElementById('email').value;
             const telefone = document.getElementById('telefone').value;
             const endereco = document.getElementById('endereco').value;
-            const mes = document.getElementById('mes').value;
-            const diaInicio = document.getElementById('diaInicio').value;
-            const totalDias = document.getElementById('totalDias').value;
+            const checkin = new Date(document.getElementById('checkin').value).toLocaleDateString('pt-BR');
+            const checkout = new Date(document.getElementById('checkout').value).toLocaleDateString('pt-BR');
             const hospedes = document.getElementById('hospedes').value;
+
+            // Cálculo final de dias para enviar no WhatsApp
+            const data1 = new Date(document.getElementById('checkin').value);
+            const data2 = new Date(document.getElementById('checkout').value);
+            const totalDias = Math.ceil((data2 - data1) / (1000 * 60 * 60 * 24));
+            const valorTotal = totalDias * 290;
 
             // Link do WhatsApp fornecido
             const linkBase = "https://wa.link/mn53p6";
@@ -385,9 +428,10 @@
                              `• Telefone: ${telefone}\n` +
                              `• Endereço: ${endereco}\n\n` +
                              `*PERÍODO DA LOCAÇÃO:*\n` +
-                             `• Mês: ${mes}\n` +
-                             `• Check-in: ${diaInicio}\n` +
+                             `• Check-in: ${checkin}\n` +
+                             `• Check-out: ${checkout}\n` +
                              `• Duração: ${totalDias} diária(s)\n` +
+                             `• Valor Estimado: R$ ${valorTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n` +
                              `• Hóspedes: ${hospedes}\n\n` +
                              `Por favor, me informe os dados de pagamento para fecharmos a vaga!`;
 
