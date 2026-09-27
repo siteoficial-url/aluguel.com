@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserva de Hospedagem | Especial de Natal em Gramado</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Reserva Exclusiva | Casa de Temporada em Gramado</title>
+    <!-- Google Fonts: Inter (Fonte padrão moderna e limpa) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #1b3b2b; /* Verde elegante de Natal */
-            --secondary: #c5a059; /* Dourado sofisticado */
-            --accent: #9e2a2b; /* Vermelho natalino refinado */
-            --bg-light: #f9f8f6;
-            --text-dark: #222222;
-            --text-muted: #666666;
-            --white: #ffffff;
-            --transition: all 0.3s ease;
+            --primary: #12281e; /* Verde floresta profundo e luxuoso */
+            --secondary: #d4af37; /* Dourado refinado */
+            --accent: #8c2727; /* Vermelho bordô elegante */
+            --bg-page: #f7f5f0; /* Fundo off-white sofisticado */
+            --card-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #6b7280;
+            --border-color: #e5e0d8;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-subtle: 0 20px 40px -15px rgba(18, 40, 30, 0.07);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -27,40 +31,54 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Header & Hero */
+        /* Hero Header Moderno */
         header {
-            background: linear-gradient(rgba(27, 59, 43, 0.85), rgba(27, 59, 43, 0.9)), url('https://images.unsplash.com/photo-1543255006-d6395b6f147f?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-            color: var(--white);
+            background: linear-gradient(135deg, rgba(18, 40, 30, 0.92), rgba(28, 56, 43, 0.88)), url('https://images.unsplash.com/photo-1543255006-d6395b6f147f?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            color: #ffffff;
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px 100px;
+            position: relative;
         }
 
-        .badge-natal {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 5px 15px;
-            border-radius: 50px;
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, var(--bg-page), transparent);
+        }
+
+        .badge-exclusive {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--secondary);
+            padding: 6px 18px;
+            border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
         }
 
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
         header h1 span {
@@ -69,173 +87,203 @@
 
         header p {
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: 580px;
             margin: 0 auto;
-            color: #e0e0e0;
+            color: #d1d5db;
             font-weight: 300;
         }
 
-        /* Container do Formulário */
-        .container {
-            max-width: 750px;
-            margin: -40px auto 60px;
+        /* Container Principal */
+        .main-container {
+            max-width: 760px;
+            margin: -60px auto 60px;
             padding: 0 20px;
             position: relative;
             z-index: 10;
         }
 
-        .reservation-card {
-            background: var(--white);
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            border: 1px solid #eae6df;
-            padding: 40px;
+        .booking-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-color);
+            padding: 45px;
         }
 
-        .urgency-banner {
-            background: rgba(158, 42, 43, 0.1);
-            border: 1px solid rgba(158, 42, 43, 0.3);
+        /* Banner de Urgência Casa de Temporada */
+        .urgency-badge {
+            background: #fdf2f2;
+            border: 1px solid #f5c6c6;
             color: var(--accent);
-            padding: 12px 20px;
-            border-radius: 8px;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
             text-align: center;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 30px;
             font-size: 0.95rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-
-        .form-section-title {
-            font-size: 1.25rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0ede6;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .form-section-title i {
-            color: var(--secondary);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #dcd6cd;
-            border-radius: 8px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            background-color: #fff;
-            transition: var(--transition);
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
-        }
-
-        /* Destaque da Unidade */
-        .unit-highlight-box {
-            background: #fbf9f5;
-            border: 1px dashed var(--secondary);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
+        /* Card Destaque da Imóvel */
+        .property-highlight {
+            background: linear-gradient(145deg, #fcfbfa, #f5f2eb);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--secondary);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            margin-bottom: 35px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .unit-info h4 {
+        .property-info h3 {
             color: var(--primary);
-            font-size: 1.1rem;
-            margin-bottom: 4px;
+            font-size: 1.25rem;
+            margin-bottom: 6px;
+            font-weight: 600;
         }
 
-        .unit-info p {
+        .property-info p {
             color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .unit-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--accent);
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Resumo de Diárias Calculado */
-        .stay-summary {
-            background: #f4f6f4;
-            border: 1px solid #d8e2d8;
-            padding: 12px 15px;
-            border-radius: 8px;
             font-size: 0.9rem;
-            color: var(--primary);
-            margin-top: -10px;
-            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+        }
+
+        .property-pricing {
+            text-align: right;
+        }
+
+        .property-pricing .price {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .property-pricing .period {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Títulos de Seção do Formulário */
+        .section-heading {
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 22px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .section-heading i {
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            letter-spacing: 0.3px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background-color: #faf9f6;
+            transition: var(--transition);
+        }
+
+        input:hover, select:hover {
+            border-color: #cbd5e1;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.12);
+        }
+
+        /* Caixa de Resumo Dinâmico */
+        .summary-box {
+            background: rgba(18, 40, 30, 0.03);
+            border: 1px dashed var(--primary);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            font-size: 0.92rem;
+            color: var(--primary);
+            margin-top: -10px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             font-weight: 500;
         }
 
         /* Botão de Envio */
         .btn-submit {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             width: 100%;
             background-color: var(--primary);
-            color: var(--white);
-            text-align: center;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 1rem;
+            color: #ffffff;
+            padding: 18px;
+            border-radius: var(--radius-md);
+            font-size: 1.05rem;
             font-weight: 600;
             letter-spacing: 0.5px;
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(27, 59, 43, 0.2);
+            box-shadow: 0 10px 25px rgba(18, 40, 30, 0.2);
             margin-top: 10px;
         }
 
         .btn-submit:hover {
-            background-color: var(--secondary);
-            color: var(--text-dark);
+            background-color: #1a3829;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+            box-shadow: 0 14px 30px rgba(18, 40, 30, 0.3);
+        }
+
+        .btn-submit i {
+            font-size: 1.25rem;
+            color: #25d366;
         }
 
         footer {
@@ -245,15 +293,25 @@
             font-size: 0.85rem;
         }
 
+        /* Responsividade */
         @media(max-width: 768px) {
-            .form-row {
+            header h1 {
+                font-size: 2.1rem;
+            }
+            .booking-card {
+                padding: 25px;
+            }
+            .form-grid {
                 grid-template-columns: 1fr;
                 gap: 0;
             }
-            .unit-highlight-box {
+            .property-highlight {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
+            }
+            .property-pricing {
+                text-align: left;
             }
         }
     </style>
@@ -261,39 +319,42 @@
 <body>
 
     <header>
-        <div class="badge-natal"><i class="fa-solid fa-snowflake"></i> Natal Luz em Gramado</div>
-        <h1>Formulário de <span>Reserva</span></h1>
-        <p>Garanta a última kitnet disponível preenchendo seus dados abaixo</p>
+        <div class="badge-exclusive"><i class="fa-solid fa-gem"></i> Temporada Exclusiva</div>
+        <h1>Gramado <span>Casa de Temporada</span></h1>
+        <p>Garanta sua estadia em uma casa de alto padrão próxima ao centro</p>
     </header>
 
-    <main class="container">
-        <div class="reservation-card">
+    <main class="main-container">
+        <div class="booking-card">
             
-            <div class="urgency-banner">
-                <i class="fa-solid fa-triangle-exclamation"></i> Atenção: Resta apenas 1 vaga para esta acomodação!
+            <div class="urgency-badge">
+                <i class="fa-solid fa-fire"></i> Última Oportunidade para Garantir sua Temporada em Gramado!
             </div>
 
-            <div class="unit-highlight-box">
-                <div class="unit-info">
-                    <h4>Kitnet Noite Estrelada</h4>
-                    <p><i class="fa-solid fa-map-pin"></i> 4 min do Centro • Totalmente Mobiliada & Climatizada</p>
+            <div class="property-highlight">
+                <div class="property-info">
+                    <h3>Casa de Temporada em Gramado</h3>
+                    <p><i class="fa-solid fa-location-dot" style="color: var(--secondary);"></i> Localização Privilegiada • Perto do Centro</p>
                 </div>
-                <div class="unit-price">R$ 129,00 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">/ diária</span></div>
+                <div class="property-pricing">
+                    <span class="price">R$ 159,00</span>
+                    <span class="period">por dia</span>
+                </div>
             </div>
 
             <form id="formReserva" onsubmit="enviarWhatsApp(event)">
                 
                 <!-- SEÇÃO DADOS DO HÓSPEDE -->
-                <div class="form-section-title">
-                    <i class="fa-solid fa-user-pen"></i> Dados do Hóspede
+                <div class="section-heading">
+                    <i class="fa-solid fa-user-circle"></i> Informações do Hóspede
                 </div>
 
-                <div class="form-group">
+                <div class="form-group full-width">
                     <label for="nome">Nome Completo *</label>
-                    <input type="text" id="nome" required placeholder="Digite seu nome completo">
+                    <input type="text" id="nome" required placeholder="Como podemos te chamar?">
                 </div>
 
-                <div class="form-row">
+                <div class="form-grid">
                     <div class="form-group">
                         <label for="email">E-mail *</label>
                         <input type="email" id="email" required placeholder="seu@email.com">
@@ -304,44 +365,48 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="endereco">Endereço Completo (Rua, Número, Bairro, Cidade/UF) *</label>
-                    <input type="text" id="endereco" required placeholder="Ex: Rua das Flores, 123 - Centro - Porto Alegre/RS">
+                <div class="form-group full-width">
+                    <label for="endereco">Endereço Residencial *</label>
+                    <input type="text" id="endereco" required placeholder="Rua, Número, Bairro, Cidade/UF">
                 </div>
 
-                <!-- SEÇÃO PERÍODO E DATA (CALENDÁRIO) -->
-                <div class="form-section-title" style="margin-top: 30px;">
-                    <i class="fa-solid fa-calendar-days"></i> Período da Hospedagem
+                <!-- SEÇÃO PERÍODO E HÓSPEDES -->
+                <div class="section-heading" style="margin-top: 15px;">
+                    <i class="fa-solid fa-calendar-check"></i> Detalhes da Estadia
                 </div>
 
-                <div class="form-row">
+                <div class="form-grid">
                     <div class="form-group">
-                        <label for="checkin">Data de Check-in (Chegada) *</label>
+                        <label for="checkin">Data de Check-in *</label>
                         <input type="date" id="checkin" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="checkout">Data de Check-out (Saída) *</label>
+                        <label for="checkout">Data de Check-out *</label>
                         <input type="date" id="checkout" required>
                     </div>
                 </div>
 
-                <div id="resumoDiarias" class="stay-summary" style="display: none;">
-                    <i class="fa-solid fa-circle-info"></i> <span id="textoResumo">Selecione as datas para calcular.</span>
+                <div id="resumoDiarias" class="summary-box" style="display: none;">
+                    <i class="fa-solid fa-circle-info" style="color: var(--secondary);"></i> 
+                    <span id="textoResumo">Calculando valores...</span>
                 </div>
 
-                <div class="form-row" style="margin-top: 15px;">
-                    <div class="form-group" style="grid-column: span 2;">
-                        <label for="hospedes">Número de Hóspedes *</label>
-                        <select id="hospedes" required>
-                            <option value="1">1 Pessoa</option>
-                            <option value="2" selected>2 Pessoas (Casal)</option>
-                        </select>
-                    </div>
+                <div class="form-group full-width">
+                    <label for="hospedes">Quantidade de Hóspedes * (Capacidade: até 7 pessoas)</label>
+                    <select id="hospedes" required>
+                        <option value="1">1 Pessoa</option>
+                        <option value="2">2 Pessoas</option>
+                        <option value="3">3 Pessoas</option>
+                        <option value="4">4 Pessoas</option>
+                        <option value="5">5 Pessoas</option>
+                        <option value="6">6 Pessoas</option>
+                        <option value="7" selected>Até 7 Pessoas</option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn-submit">
-                    <i class="fa-brands fa-whatsapp"></i> Enviar Solicitação de Reserva
+                    <i class="fa-brands fa-whatsapp"></i> Finalizar Reserva via WhatsApp
                 </button>
 
             </form>
@@ -349,24 +414,20 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Locação Gramado Natal Luz. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Temporada Gramado. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- SCRIPT PARA CALENDÁRIO E WHATSAPP -->
+    <!-- SCRIPT DE CÁLCULO E INTEGRAÇÃO WHATSAPP -->
     <script>
-        // Configurar data mínima como hoje e preencher datas padrão para o Natal Luz
         const hoje = new Date().toISOString().split('T')[0];
         const inputCheckin = document.getElementById('checkin');
         const inputCheckout = document.getElementById('checkout');
         
         inputCheckin.min = hoje;
-        
-        // Definir valores padrão atraentes para o Natal Luz (ex: 10/12 a 13/12 de 2026)
         inputCheckin.value = "2026-12-10";
         inputCheckout.value = "2026-12-13";
         inputCheckout.min = inputCheckin.value;
 
-        // Atualizar data mínima de check-out ao mudar o check-in
         inputCheckin.addEventListener('change', function() {
             inputCheckout.min = inputCheckin.value;
             if(inputCheckout.value < inputCheckin.value) {
@@ -388,8 +449,8 @@
                 const textoResumo = document.getElementById('textoResumo');
 
                 if(diferencaDias > 0) {
-                    const valorTotal = diferencaDias * 129;
-                    textoResumo.innerHTML = `Total de <strong>${diferencaDias} diária(s)</strong> selecionada(s) (Estimativa: R$ ${valorTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})})`;
+                    const valorTotal = diferencaDias * 159;
+                    textoResumo.innerHTML = `Total de <strong>${diferencaDias} diária(s)</strong> selecionada(s) • Valor Estimado: <strong>R$ ${valorTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>`;
                     boxResumo.style.display = 'flex';
                 } else {
                     textoResumo.innerHTML = `A data de saída deve ser posterior à data de entrada.`;
@@ -398,7 +459,6 @@
             }
         }
 
-        // Executar no carregamento para exibir o cálculo inicial padrão
         calcularDiarias();
 
         function enviarWhatsApp(event) {
@@ -412,28 +472,26 @@
             const checkout = new Date(document.getElementById('checkout').value).toLocaleDateString('pt-BR');
             const hospedes = document.getElementById('hospedes').value;
 
-            // Cálculo final de dias para enviar no WhatsApp
             const data1 = new Date(document.getElementById('checkin').value);
             const data2 = new Date(document.getElementById('checkout').value);
             const totalDias = Math.ceil((data2 - data1) / (1000 * 60 * 60 * 24));
-            const valorTotal = totalDias * 290;
+            const valorTotal = totalDias * 159;
 
-            // Link do WhatsApp fornecido
             const linkBase = "https://wa.link/mn53p6";
             
-            const mensagem = `Olá! Gostaria de confirmar a reserva da *última unidade disponível (Kitnet Noite Estrelada)* para o Natal em Gramado.\n\n` +
-                             `*DADOS DO HÓSPEDE:*\n` +
+            const mensagem = `Olá! Gostaria de confirmar a reserva da *Casa de Temporada em Gramado (Perto do Centro)*.\n\n` +
+                             `*DADOS DO CONTRATANTE:*\n` +
                              `• Nome: ${nome}\n` +
                              `• E-mail: ${email}\n` +
                              `• Telefone: ${telefone}\n` +
                              `• Endereço: ${endereco}\n\n` +
-                             `*PERÍODO DA LOCAÇÃO:*\n` +
+                             `*DETALHES DA ESTADIA:*\n` +
                              `• Check-in: ${checkin}\n` +
                              `• Check-out: ${checkout}\n` +
                              `• Duração: ${totalDias} diária(s)\n` +
-                             `• Valor Estimado: R$ ${valorTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n` +
+                             `• Valor Total: R$ ${valorTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n` +
                              `• Hóspedes: ${hospedes}\n\n` +
-                             `Por favor, me informe os dados de pagamento para fecharmos a vaga!`;
+                             `Por favor, me informe os próximos passos para efetivar a reserva!`;
 
             const url = `${linkBase}?text=${encodeURIComponent(mensagem)}`;
             window.open(url, '_blank');
