@@ -449,7 +449,7 @@
                 const textoResumo = document.getElementById('textoResumo');
 
                 if(diferencaDias > 0) {
-                    const valorTotal = diferencaDias * 159;
+                    const valorTotal = diferencaDias * 367;
                     textoResumo.innerHTML = `Total de <strong>${diferencaDias} diária(s)</strong> selecionada(s) • Valor Estimado: <strong>R$ ${valorTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>`;
                     boxResumo.style.display = 'flex';
                 } else {
